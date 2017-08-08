@@ -1,5 +1,10 @@
 (ns all-your-base)
 
+(defn digit-seq
+  "Convert string into sequence of numeric digits."
+  [s]
+  (map #(Character/getNumericValue %) s))
+
 (defn valid-digits?
   "Returns true if every digit in sequence `digits` is found in radix `base`,
   else false."
