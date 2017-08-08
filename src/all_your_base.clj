@@ -1,13 +1,13 @@
 (ns all-your-base)
 
-(defn- valid-digits?
+(defn valid-digits?
   "Returns true if every digit in sequence `digits` is found in radix `base`,
   else false."
   [base digits]
   (let [digit-range (set (range base))]
     (every? digit-range digits)))
 
-(defn- to-decimal
+(defn to-decimal
   "Convert a digit sequence from radix `base` to a decimal number."
   [base digits]
   (reduce (fn [a b] (+ (* base a) b)) 0 digits))
