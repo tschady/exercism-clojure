@@ -8,12 +8,10 @@
 (defn- strip-dashes [s] (str/replace s #"-" ""))
 
 (defn- isbn-10-checksum [s]
-  (as-> s x
-    (map char->val x)
-    (keep identity x)
-    (map * (iterate dec 10) x)
-    (reduce + 0 x)
-    (mod x 11)))
+  (let [luhn-sum (->> (keep char->val s)
+                      (map * (iterate dec 10))
+                      (reduce + 0))]
+    (mod luhn-sum 11)))
 
 (s/def ::isbn-10 (s/and string?
                         #(re-matches #"\d{9}[\d|X]" (strip-dashes %))
